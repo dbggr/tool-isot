@@ -61,7 +61,7 @@ export class DefaultNetworkServiceService implements NetworkServiceService {
       return await this.networkServiceRepository.create(validatedData);
     } catch (error) {
       if (error instanceof ZodError) {
-        const errorMessages = error.errors.map(err => `${err.path.join('.')}: ${err.message}`);
+        const errorMessages = error.issues.map(err => `${err.path.join('.')}: ${err.message}`);
         throw new ValidationError(`Validation failed: ${errorMessages.join(', ')}`);
       }
       throw error;
@@ -103,7 +103,7 @@ export class DefaultNetworkServiceService implements NetworkServiceService {
             ServiceFiltersSchema.parse(tempFilter);
           } catch (error) {
             if (error instanceof ZodError) {
-              const errorMessages = error.errors.map(err => `${err.path.join('.')}: ${err.message}`);
+              const errorMessages = error.issues.map(err => `${err.path.join('.')}: ${err.message}`);
               throw new ValidationError(`Filter validation failed: ${errorMessages.join(', ')}`);
             }
             throw error;
@@ -117,7 +117,7 @@ export class DefaultNetworkServiceService implements NetworkServiceService {
         ServiceFiltersSchema.parse(filtersForValidation);
       } catch (error) {
         if (error instanceof ZodError) {
-          const errorMessages = error.errors.map(err => `${err.path.join('.')}: ${err.message}`);
+          const errorMessages = error.issues.map(err => `${err.path.join('.')}: ${err.message}`);
           throw new ValidationError(`Filter validation failed: ${errorMessages.join(', ')}`);
         }
         throw error;
@@ -158,7 +158,7 @@ export class DefaultNetworkServiceService implements NetworkServiceService {
       return await this.networkServiceRepository.update(id, validatedData);
     } catch (error) {
       if (error instanceof ZodError) {
-        const errorMessages = error.errors.map(err => `${err.path.join('.')}: ${err.message}`);
+        const errorMessages = error.issues.map(err => `${err.path.join('.')}: ${err.message}`);
         throw new ValidationError(`Validation failed: ${errorMessages.join(', ')}`);
       }
       throw error;
@@ -211,7 +211,7 @@ export class DefaultNetworkServiceService implements NetworkServiceService {
       return { isValid: true, errors: [] };
     } catch (error) {
       if (error instanceof ZodError) {
-        const errors = error.errors.map(err => `${err.path.join('.')}: ${err.message}`);
+        const errors = error.issues.map(err => `${err.path.join('.')}: ${err.message}`);
         return { isValid: false, errors };
       }
       return { isValid: false, errors: ['Unknown validation error'] };

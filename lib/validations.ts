@@ -29,7 +29,7 @@ const isValidDomain = (domain: string): boolean => {
 const serviceTypes = ['web', 'database', 'api', 'storage', 'security', 'monitoring'] as const;
 
 // IP address validation schema
-const ipAddressSchema = z.string()
+const ipAddressSchema = z.string({ error: 'IP address is required' })
   .min(1, 'IP address is required')
   .refine(isValidIPAddress, {
     message: 'Invalid IP address format (e.g., 192.168.1.1)'
@@ -63,27 +63,27 @@ export const createServiceSchema = z.object({
     .regex(/^[a-zA-Z0-9_-]+$/, 'Service name can only contain letters, numbers, underscores, and hyphens'),
   
   type: z.enum(serviceTypes, {
-    errorMap: () => ({ message: 'Please select a valid service type' })
+    error: 'Please select a valid service type'
   }),
   
   ipAddress: ipAddressSchema,
   
-  internalPorts: z.array(portSchema)
+  internalPorts: z.array(portSchema, { error: 'At least one internal port is required' })
     .min(1, 'At least one internal port is required')
     .max(50, 'Maximum 50 internal ports allowed'),
-  
-  externalPorts: z.array(portSchema)
+
+  externalPorts: z.array(portSchema, { error: 'At least one external port is required' })
     .min(1, 'At least one external port is required')
     .max(50, 'Maximum 50 external ports allowed'),
-  
+
   vlan: vlanSchema.optional(),
-  
+
   domain: domainSchema.optional(),
-  
+
   groupId: z.string()
     .min(1, 'Group selection is required')
     .uuid('Invalid group selection'),
-  
+
   tags: z.array(z.string()).optional(),
 });
 
@@ -96,7 +96,7 @@ export const updateServiceSchema = z.object({
     .optional(),
   
   type: z.enum(serviceTypes, {
-    errorMap: () => ({ message: 'Please select a valid service type' })
+    error: 'Please select a valid service type'
   }).optional(),
   
   ipAddress: ipAddressSchema.optional(),

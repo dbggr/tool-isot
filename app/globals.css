@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4 loads the theme (color tokens, etc.) from the existing v3-style
+   config so shadcn utilities like `border-border` remain available to @apply. */
+@config "../tailwind.config.ts";
 
 @layer utilities {
   .text-balance {
