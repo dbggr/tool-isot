@@ -364,7 +364,7 @@ export function GlobalSearch({
                         className="w-full justify-start text-sm text-gray-300 hover:text-pink-400 hover:bg-gray-800/50"
                       >
                         <Search className="mr-2 h-4 w-4" />
-                        View all results for "{query}"
+                        View all results for &quot;{query}&quot;
                       </Button>
                     </div>
                   </>
@@ -373,7 +373,7 @@ export function GlobalSearch({
             ) : query.length >= 2 ? (
               <div className="p-4 text-center">
                 <div className="text-sm text-gray-400 mb-2">
-                  No results found for "{query}"
+                  No results found for &quot;{query}&quot;
                 </div>
                 <Button
                   variant="ghost"

@@ -79,7 +79,7 @@ describe('Service Validation Schemas', () => {
       });
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Required');
+        expect(result.error.issues[0].message).toBe('IP address is required');
       }
     });
 
@@ -102,7 +102,7 @@ describe('Service Validation Schemas', () => {
       });
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe('Required');
+        expect(result.error.issues[0].message).toBe('At least one internal port is required');
       }
     });
 

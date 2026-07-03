@@ -242,7 +242,7 @@ export function GroupsTable({ groups, loading = false, onDelete }: GroupsTablePr
         description={
           deleteGroup ? (
             <>
-              Are you sure you want to delete the group "{deleteGroup.name}"?
+              Are you sure you want to delete the group &quot;{deleteGroup.name}&quot;?
               {getGroupServicesCount(deleteGroup.id) > 0 && (
                 <div className="mt-2 p-2 bg-red-500/10 border border-red-500/30 rounded text-sm text-red-400">
                   <strong>Warning:</strong> This group has {getGroupServicesCount(deleteGroup.id)} associated service(s). 

@@ -12,64 +12,10 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
 
-  // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
-    // Exclude tactical-command directory from build
-    config.resolve.alias = {
-      ...config.resolve.alias,
-    }
-    
-    // Add ignore pattern for tactical-command directory
-    config.module.rules.push({
-      test: /tactical-command/,
-      use: 'null-loader'
-    })
-
-    // Production optimizations
-    if (!dev) {
-      // Enable tree shaking for better bundle size
-      config.optimization = {
-        ...config.optimization,
-        usedExports: true,
-        sideEffects: false,
-      }
-
-      // Optimize chunks for better caching
-      config.optimization.splitChunks = {
-        ...config.optimization.splitChunks,
-        chunks: 'all',
-        cacheGroups: {
-          default: false,
-          vendors: false,
-          // Vendor chunk for stable dependencies
-          vendor: {
-            name: 'vendor',
-            chunks: 'all',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 20,
-          },
-          // Common chunk for shared components
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 10,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
-          // UI components chunk
-          ui: {
-            name: 'ui',
-            chunks: 'all',
-            test: /[\\/]components[\\/]ui[\\/]/,
-            priority: 30,
-          },
-        },
-      }
-    }
-
-    return config
-  },
+  // Note: The former custom `webpack` config (null-loader for a now-removed
+  // `tactical-command` dir + manual splitChunks) was dropped in the Next 16
+  // upgrade. Next 16 defaults to Turbopack, which handles chunking/tree-shaking
+  // automatically and rejects a `webpack` key. The excluded dir no longer exists.
 
   // Compiler optimizations
   compiler: {

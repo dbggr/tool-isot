@@ -35,6 +35,8 @@ module.exports = {
     'ts-jest': {
       tsconfig: {
         jsx: 'react-jsx',
+        ignoreDeprecations: '6.0',
+        rootDir: '.',
       },
     },
   },

@@ -333,7 +333,7 @@ export default function GroupDetailPage() {
         title="Delete Group"
         description={
           <>
-            Are you sure you want to delete the group "{group.name}"?
+            Are you sure you want to delete the group &quot;{group.name}&quot;?
             {services && services.length > 0 && (
               <div className="mt-2 p-2 bg-destructive/10 rounded text-sm">
                 <strong>Warning:</strong> This group has {services.length} associated service(s). 
