@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { FixedSizeList as List, ListChildComponentProps } from 'react-window'
+import { List, type RowComponentProps, type ListImperativeAPI } from 'react-window'
 import { 
   Table, 
   TableBody, 
@@ -39,16 +39,21 @@ interface VirtualTableProps<T> {
   emptyMessage?: string
 }
 
-interface RowProps<T> extends ListChildComponentProps {
-  data: {
-    items: T[]
-    columns: VirtualTableColumn<T>[]
-    onRowClick?: (item: T, index: number) => void
-  }
+interface VirtualTableRowData<T> {
+  items: T[]
+  columns: VirtualTableColumn<T>[]
+  onRowClick?: (item: T, index: number) => void
 }
 
-function VirtualTableRow<T>({ index, style, data }: RowProps<T>) {
-  const { items, columns, onRowClick } = data
+// react-window v2 passes `index`/`style` plus the `rowProps` object directly to
+// the row component (no more nested `data`).
+function VirtualTableRow<T>({
+  index,
+  style,
+  items,
+  columns,
+  onRowClick,
+}: RowComponentProps<VirtualTableRowData<T>>) {
   const item = items[index]
 
   if (!item) return null
@@ -94,7 +99,7 @@ export function VirtualTable<T>({
   loading = false,
   emptyMessage = 'No data available'
 }: VirtualTableProps<T>) {
-  const listRef = useRef<List>(null)
+  const listRef = useRef<ListImperativeAPI | null>(null)
   const [containerWidth, setContainerWidth] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -198,20 +203,18 @@ export function VirtualTable<T>({
       {/* Virtual scrolling body */}
       <div style={{ height: height - 49 }}> {/* Subtract header height */}
         <List
-          ref={listRef}
-          height={height - 49}
-          itemCount={data.length}
-          itemSize={rowHeight}
+          listRef={listRef}
+          rowCount={data.length}
+          rowHeight={rowHeight}
           overscanCount={overscan}
-          width={Math.max(totalWidth, containerWidth)}
-          itemData={{
+          rowComponent={VirtualTableRow}
+          rowProps={{
             items: data as unknown[],
             columns: columns as VirtualTableColumn<unknown>[],
             onRowClick: onRowClick as ((item: unknown, index: number) => void) | undefined
           }}
-        >
-          {VirtualTableRow}
-        </List>
+          style={{ height: height - 49, width: Math.max(totalWidth, containerWidth) }}
+        />
       </div>
     </div>
   )

@@ -62,7 +62,7 @@ export default function TemplatePage({
                     collapsed={sidebarCollapsed}
                     onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
                     showSystemStatus={showSystemStatus}
-                    systemData={customSystemData}
+                    systemData={customSystemData ?? {}}
                 />
 
                 <MainContent

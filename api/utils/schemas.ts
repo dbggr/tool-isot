@@ -23,6 +23,12 @@ const domainSchema = z.string().refine(isValidDomain, {
   message: 'Invalid domain format'
 });
 
+// Service type — required by CreateNetworkServiceDto and the NetworkService entity.
+const serviceTypeSchema = z.enum(
+  ['web', 'database', 'api', 'storage', 'security', 'monitoring'],
+  { error: 'Please select a valid service type' }
+);
+
 // Group validation schemas
 export const CreateGroupSchema = z.object({
   name: z.string()
@@ -52,6 +58,7 @@ export const CreateNetworkServiceSchema = z.object({
   name: z.string()
     .min(1, 'Service name is required')
     .max(100, 'Service name must be 100 characters or less'),
+  type: serviceTypeSchema,
   domain: domainSchema,
   internalPorts: z.array(portSchema)
     .min(1, 'At least one internal port is required')
@@ -77,6 +84,7 @@ export const UpdateNetworkServiceSchema = z.object({
     .min(1, 'Service name is required')
     .max(100, 'Service name must be 100 characters or less')
     .optional(),
+  type: serviceTypeSchema.optional(),
   domain: domainSchema.optional(),
   internalPorts: z.array(portSchema)
     .min(1, 'At least one internal port is required')

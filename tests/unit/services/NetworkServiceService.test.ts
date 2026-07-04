@@ -182,6 +182,7 @@ describe('NetworkServiceService', () => {
       const serviceData: CreateNetworkServiceDto = {
         groupId: 'test-group-id',
         name: 'test-service',
+        type: 'web',
         domain: 'example.com',
         internalPorts: [8080, 8081],
         externalPorts: [80, 443],
@@ -213,6 +214,7 @@ describe('NetworkServiceService', () => {
       const serviceData: CreateNetworkServiceDto = {
         groupId: 'test-group-id',
         name: 'minimal-service',
+        type: 'web',
         domain: 'minimal.com',
         internalPorts: [3000],
         externalPorts: [80],
@@ -232,6 +234,7 @@ describe('NetworkServiceService', () => {
       const serviceData: CreateNetworkServiceDto = {
         groupId: 'non-existent-group',
         name: 'test-service',
+        type: 'web',
         domain: 'example.com',
         internalPorts: [8080],
         externalPorts: [80],
@@ -735,6 +738,7 @@ describe('NetworkServiceService', () => {
       const data = {
         groupId: 'test-group-id',
         name: 'test-service',
+        type: 'web',
         domain: 'example.com',
         internalPorts: [8080],
         externalPorts: [80],
@@ -754,6 +758,7 @@ describe('NetworkServiceService', () => {
       const data = {
         groupId: 'test-group-id',
         name: 'test-service',
+        type: 'web',
         domain: 'example.com',
         internalPorts: [8080],
         externalPorts: [80],
