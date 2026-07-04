@@ -95,6 +95,7 @@ describe('Validation Schemas', () => {
       const validData = {
         groupId: 'test-group',
         name: 'test-service',
+        type: 'web',
         domain: 'example.com',
         internalPorts: [8080, 8081],
         externalPorts: [80, 443],
@@ -112,6 +113,7 @@ describe('Validation Schemas', () => {
       const validData = {
         groupId: 'test-group',
         name: 'test-service',
+        type: 'web',
         domain: 'example.com',
         internalPorts: [8080],
         externalPorts: [80]

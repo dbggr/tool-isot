@@ -97,7 +97,7 @@ export function GroupForm({ group, mode, onSuccess, onCancel }: GroupFormProps) 
     const currentValues = form.getValues()
     const result = schema.safeParse(currentValues)
     if (!result.success) {
-      result.error.errors.forEach((error) => {
+      result.error.issues.forEach((error) => {
         form.setError(error.path[0] as keyof (CreateGroupInput | UpdateGroupInput), {
           message: error.message
         })

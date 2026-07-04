@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import Link from "next/link"
 import { Plus, Server, Monitor, Target, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -72,13 +73,17 @@ export default function ServicesPage() {
 
         {/* Services Table */}
         <div className="flex flex-1 flex-col gap-4">
-          <ServicesTable
-            onServiceSelect={handleServiceSelect}
-            onServiceEdit={handleServiceEdit}
-            onServiceDelete={handleServiceDelete}
-            onBulkDelete={handleBulkDelete}
-            onBulkGroupChange={handleBulkGroupChange}
-          />
+          {/* ServicesTable reads the URL via useSearchParams, which requires a
+              Suspense boundary to prerender without a CSR bailout (Next 16). */}
+          <Suspense fallback={<div className="text-sm text-neutral-400">Loading services…</div>}>
+            <ServicesTable
+              onServiceSelect={handleServiceSelect}
+              onServiceEdit={handleServiceEdit}
+              onServiceDelete={handleServiceDelete}
+              onBulkDelete={handleBulkDelete}
+              onBulkGroupChange={handleBulkGroupChange}
+            />
+          </Suspense>
         </div>
       </div>
     </TemplatePage>
