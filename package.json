@@ -44,7 +44,7 @@
     "@radix-ui/react-tooltip": "^1.2.13",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
-    "better-sqlite3": "^12.11.1",
+    "better-sqlite3": "^13.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.25.0",
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.9",
-    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/better-sqlite3": "^7.6.0",
@@ -82,6 +82,7 @@
     "typescript": "^6"
   },
   "overrides": {
-    "postcss": "^8.5.16"
+    "postcss": "^8.5.16",
+    "sharp": "^0.35.3"
   }
 }
