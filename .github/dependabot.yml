@@ -8,8 +8,10 @@ updates:
     groups:
       minor-and-patch:
         update-types: ["minor", "patch"]
-    # TS7 blocked by typescript-eslint/ts-jest peer range (typescript <6.1.0);
-    # ESLint 10 breaks eslint-plugin-react. Lift when ecosystem supports it (2026-07-18)
+    # TS7 blocked by typescript-eslint (typescript <6.1.0) and ts-jest (typescript <7);
+    # ESLint 10 blocked by eslint-plugin-react (eslint ^9.7 max, via eslint-config-next).
+    # typescript-eslint 8.65 now accepts eslint ^10, so ESLint 10 waits on react plugin only.
+    # Lift when ecosystem supports it (re-checked 2026-07-24)
     ignore:
       - dependency-name: "typescript"
         update-types: ["version-update:semver-major"]

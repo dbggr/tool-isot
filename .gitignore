@@ -140,3 +140,5 @@ coverage/
 # yarn.lock
 # pnpm-lock.yaml
 tactical-command
+# git worktrees
+.worktrees/
