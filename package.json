@@ -73,7 +73,7 @@
     "eslint-config-next": "^16.3.8",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
-    "postcss": "^8.5.16",
+    "postcss": "^8.5.29",
     "supertest": "^7.3.1",
     "tailwindcss-animate": "^1.0.7",
     "ts-jest": "^29.4.14",
@@ -82,7 +82,8 @@
     "typescript": "^6"
   },
   "overrides": {
-    "postcss": "^8.5.16",
-    "sharp": "^0.35.4"
+    "postcss": "^8.5.29",
+    "postcss-selector-parser": "^7.1.6",
+    "sharp": "^0.35.5"
   }
 }
